@@ -31,14 +31,8 @@ LocalDatabase를 이용한 나만의 맛집, MySQL을 이용한 우리만의 맛
   - dio: ^5.4.2+1
 
 ## 사진
-<!-- 
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-04-07 at 15 57 47](https://github.com/lcy0512/Must_Eat_Place/assets/152368203/c9ffbe76-b836-4ab6-8c3b-9132cc1ac1c5)
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-04-07 at 15 49 52](https://github.com/lcy0512/Must_Eat_Place/assets/152368203/979ae07e-c216-49af-9bbb-429bd719f66d)
-![Simulator Screenshot - iPhone 15 Pro Max - 2024-04-07 at 15 57 34](https://github.com/lcy0512/Must_Eat_Place/assets/152368203/abf210c6-328c-4282-a27d-e185e4c2808b)
--->
 
-<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/c9ffbe76-b836-4ab6-8c3b-9132cc1ac1c5" width=200, height=450>
-<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/979ae07e-c216-49af-9bbb-429bd719f66d" width=200, height=450>
-<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/abf210c6-328c-4282-a27d-e185e4c2808b" width=200, height=450>
-
+<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/d8fc0687-059e-4f73-bbe0-90e2beb183da" width=200, height=450>
+<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/9b6b6f8c-924a-4ea8-bc92-04afdcdbedd4" width=200, height=450>
+<img src="https://github.com/lcy0512/Must_Eat_Place/assets/152368203/136787de-bf87-4191-a2fd-55a3d354f8c1" width=200, height=450>
 
