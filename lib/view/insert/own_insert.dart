@@ -223,7 +223,6 @@ class _OwnInsertState extends State<OwnInsert> {
                           ),
                         ),
                         maxLength: 50,
-                        // keyboardType: TextInputType.multiline,
                         maxLines: null,
                         expands: true,
                         keyboardType: TextInputType.text,
@@ -232,17 +231,11 @@ class _OwnInsertState extends State<OwnInsert> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
-                      await handler.insertReview(
-                        Review(
-                          name: nameController.text,
-                          phone: phoneController.text,
-                          lat: latData,
-                          long: longData,
-                          image: await imageFile!.readAsBytes(),
-                          estimate: estimateController.text,
-                          initdate: DateTime.now().toString()
-                        )
-                      );
+                      if(imageFile == null) {
+                        checkImage();
+                        return;
+                      }
+                      insertSQLite();
                       _showDiaglog();
                     },
                     child: const Text('저장하기')
@@ -277,6 +270,34 @@ class _OwnInsertState extends State<OwnInsert> {
             Get.back();
             Get.back();
           },
+          child: const Text('확인')
+        )
+      ]
+    );
+  }
+
+  insertSQLite() async {
+    await handler.insertReview(
+      Review(
+        name: nameController.text,
+        phone: phoneController.text,
+        lat: latData,
+        long: longData,
+        image: await imageFile!.readAsBytes(),
+        estimate: estimateController.text,
+        initdate: DateTime.now().toString()
+      )
+    );
+  }
+
+  checkImage() {
+    Get.defaultDialog(
+      title: '경고',
+      middleText: '이미지를 선택해 주세요!',
+      barrierDismissible: false,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Get.back(),
           child: const Text('확인')
         )
       ]

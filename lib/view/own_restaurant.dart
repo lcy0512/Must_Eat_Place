@@ -112,7 +112,7 @@ class _OwnRestaurantState extends State<OwnRestaurant> {
                         SlidableAction(
                           onPressed: (context) async {
                             _showDiaglog();
-                            await handler.deleteReview(snapshot.data![index].name);
+                            await handler.deleteReview(snapshot.data![index].seq);
                           },
                           icon: Icons.delete_outline,
                           label: '삭제하기',

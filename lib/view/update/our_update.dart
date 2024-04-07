@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
@@ -283,26 +284,25 @@ class _OurUpdateState extends State<OurUpdate> {
     String phone = phoneController.text;
     String estimate = estimateController.text;
     String seq = argument['seq'];
+    String time = argument['initdate'];
 
-    String image = '';
+    String imageName = '';
     String result = '';
 
     if(galleryImageFile == null) {
       result = 'success';
-      image = argument['image'];
+      imageName = argument['image'];
     }
     else {
       result = await uploadImage();
-      image = '${nameController.text}_${latData}_$longData.jpg';
+      imageName = '${nameController.text}_${latData}_${longData}_$time.jpg';
     }
 
     if(result == 'success') {
       // 이미지 업로드 성공
       result = '';
 
-      // String image = '${nameController.text}_${latData}_$longData.jpg';
-
-      var url = Uri.parse('http://localhost:8080/Flutter/MustEatPlace/update_musteat_list.jsp?seq=$seq&name=$name&phone=$phone&image=$image&estimate=$estimate');
+      var url = Uri.parse('http://localhost:8080/Flutter/MustEatPlace/update_musteat_list.jsp?seq=$seq&name=$name&phone=$phone&image=$imageName&estimate=$estimate&deletefile=${argument['image']}');
       var response = await http.get(url);
       var convert = await json.decode(utf8.decode(response.bodyBytes));
       result = convert['result'];
@@ -324,7 +324,7 @@ class _OurUpdateState extends State<OurUpdate> {
     Dio dioImage = Dio();
 
     final formData = dio.FormData.fromMap({
-      'file': await dio.MultipartFile.fromFile(galleryImageFile!.path, filename: '${nameController.text}_${latData}_$longData.jpg'),
+      'file': await dio.MultipartFile.fromFile(galleryImageFile!.path, filename: '${nameController.text}_${latData}_${longData}_${argument['initdate']}.jpg'),
     });
 
     dio.Response response = await dioImage.post('http://localhost:8080/Flutter/MustEatPlace/upload_image.jsp', data: formData);

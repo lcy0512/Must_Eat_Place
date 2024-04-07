@@ -85,7 +85,7 @@ class _OurRestaurantState extends State<OurRestaurant> {
             padding: const EdgeInsets.fromLTRB(0, 0, 10, 0),
             child: IconButton(
                 onPressed: () {
-                  Get.to(const OurInsert())!.then((value) => reloadData());
+                  Get.to(const OurInsert())!.then((value) => setState(() {reloadData();}));
                 }, icon: const Icon(Icons.add_circle_outline)),
           )
         ],

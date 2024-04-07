@@ -232,8 +232,11 @@ class _OurInsertState extends State<OurInsert> {
                   ),
                   ElevatedButton(
                     onPressed: () async {
+                      if(galleryImageFile == null) {
+                        checkImage();
+                        return;
+                      }
                       dbInsertAction();
-                      // _showDiaglog();
                     },
                     child: const Text('저장하기')
                   )
@@ -282,15 +285,17 @@ class _OurInsertState extends State<OurInsert> {
 
     String result = '';
 
-    result = await uploadImage();
+    String time = DateTime.now().toString();
+
+    result = await uploadImage(time);
 
     if(result == 'success') {
       // 이미지 업로드 성공
       result = '';
 
-      String image = '${nameController.text}_${latData}_$longData.jpg';
+      String imageName = '${nameController.text}_${latData}_${longData}_$time.jpg';
 
-      var url = Uri.parse('http://localhost:8080/Flutter/MustEatPlace/insert_musteat_list.jsp?name=$name&phone=$phone&lat=$latData&lng=$longData&image=$image&estimate=$estimate&initdate=$initdate');
+      var url = Uri.parse('http://localhost:8080/Flutter/MustEatPlace/insert_musteat_list.jsp?name=$name&phone=$phone&lat=$latData&lng=$longData&image=$imageName&estimate=$estimate&initdate=$initdate');
       var response = await http.get(url);
       var convert = await json.decode(utf8.decode(response.bodyBytes));
       result = convert['result'];
@@ -308,11 +313,13 @@ class _OurInsertState extends State<OurInsert> {
     }
   }
 
-  Future<String> uploadImage() async {
+  Future<String> uploadImage(time) async {
     dio.Dio dioImage = dio.Dio();
 
+    String imageName = '${nameController.text}_${latData}_${longData}_$time.jpg';
+
     final formData = dio.FormData.fromMap({
-      'file': await dio.MultipartFile.fromFile(galleryImageFile!.path, filename: '${nameController.text}_${latData}_$longData.jpg'),
+      'file': await dio.MultipartFile.fromFile(galleryImageFile!.path, filename: imageName),
     });
 
     dio.Response response = await dioImage.post('http://localhost:8080/Flutter/MustEatPlace/upload_image.jsp', data: formData);
@@ -342,5 +349,18 @@ class _OurInsertState extends State<OurInsert> {
     );
   }
 
+  checkImage() {
+    Get.defaultDialog(
+      title: '경고',
+      middleText: '이미지를 선택해 주세요!',
+      barrierDismissible: false,
+      actions: [
+        ElevatedButton(
+          onPressed: () => Get.back(),
+          child: const Text('확인')
+        )
+      ]
+    );
+  }
 
 }

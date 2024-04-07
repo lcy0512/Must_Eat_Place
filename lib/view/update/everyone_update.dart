@@ -259,8 +259,9 @@ class _EveryoneUpdateState extends State<EveryoneUpdate> {
   }
 
   Future<String> preparingImage() async {
+    FirebaseStorage.instance.ref().child('musteatplaceimage').child('${argument.name}_${latData}_${longData}_${argument.initdate}.png').delete();
+
     final firebaseStorage = FirebaseStorage.instance.ref().child('musteatplaceimage').child('${nameController.text}_${latData}_${longData}_${argument.initdate}.png');
-    await firebaseStorage.delete();
     await firebaseStorage.putFile(imgFile!);
 
     String downloadURL = await firebaseStorage.getDownloadURL();

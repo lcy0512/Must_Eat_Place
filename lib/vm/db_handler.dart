@@ -62,11 +62,11 @@ class DatabaseHandler {
     return result;
   }
 
-  Future<void> deleteReview(String seq) async {
+  Future<void> deleteReview(int? seq) async {
     final Database db = await initalizeDB();
     await db.rawDelete(
       'DELETE FROM musteatplace '
-      'WHERE name = ?',
+      'WHERE seq = ?',
       [seq]
     );
   }
